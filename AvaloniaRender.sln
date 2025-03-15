@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34825.169
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaRender", "AvaloniaRender\AvaloniaRender.csproj", "{10152908-1BE9-4EAA-A65A-27A5F8D5AC66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaRender.Sample", "AvaloniaRender\AvaloniaRender.Sample.csproj", "{10152908-1BE9-4EAA-A65A-27A5F8D5AC66}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaRender.Veldrid", "AvaloniaRender.Veldrid\AvaloniaRender.Veldrid.csproj", "{8FC3B8C9-2311-4915-AA91-9A30240FBF79}"
 EndProject
