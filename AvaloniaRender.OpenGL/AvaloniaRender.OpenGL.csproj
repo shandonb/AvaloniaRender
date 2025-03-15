@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.5" />
+    <PackageReference Include="Silk.NET.OpenGL" Version="2.22.0" />
+    <PackageReference Include="SPB" Version="0.0.4-build32" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AvaloniaRender.Base\AvaloniaRender.Core.csproj" />
+  </ItemGroup>
+
+</Project>
