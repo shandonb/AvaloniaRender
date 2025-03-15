@@ -3,8 +3,10 @@
 A simple library for loading both Silk.NET.OpenGL and Veldrid into Avalonia.
 Other renders like webgpu can also work easily by creating surfaces from the window handle.
 
+![image](https://github.com/user-attachments/assets/ea1fd4f0-82b3-4edd-8b18-e120e8513a69)
+
 Currently I use embedded windows to display.
-While there are methods like gpu interop, Veldrid was tricky to implement due to how swap chains need to be done.
+While there are methods like gpu interop, Veldrid is tricky to implement due to how swap chains need to be done.
 
 ## Usage Veldrid:
 
