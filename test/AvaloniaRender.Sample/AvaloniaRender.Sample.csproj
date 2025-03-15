@@ -26,8 +26,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\AvaloniaRender.Base\AvaloniaRender.Core.csproj" />
-    <ProjectReference Include="..\AvaloniaRender.OpenGL\AvaloniaRender.OpenGL.csproj" />
-    <ProjectReference Include="..\AvaloniaRender.Veldrid\AvaloniaRender.Veldrid.csproj" />
+    <ProjectReference Include="..\..\src\AvaloniaRender.Base\AvaloniaRender.Core.csproj" />
+    <ProjectReference Include="..\..\src\AvaloniaRender.OpenGL\AvaloniaRender.OpenGL.csproj" />
+    <ProjectReference Include="..\..\src\AvaloniaRender.Veldrid\AvaloniaRender.Veldrid.csproj" />
   </ItemGroup>
 </Project>
