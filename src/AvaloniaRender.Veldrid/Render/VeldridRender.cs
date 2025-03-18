@@ -1,10 +1,15 @@
-﻿using System;
+﻿using AvaloniaRender.Veldrid.OpenGL;
+using SPB.Graphics.OpenGL;
+using SPB.Windowing;
+using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Veldrid;
+using Veldrid.OpenGL;
+using Vulkan.Xcb;
 
 namespace AvaloniaRender.Veldrid;
 
@@ -45,6 +50,17 @@ public class VeldridRender
     /// </summary>
     public double TargetFrameRate = 60;
 
+    // for opengl
+    internal SwappableNativeWindowBase OpenGLWindow;
+    /// <summary>
+    /// OpenGL context from window creation.
+    /// </summary>
+    internal OpenGLContextBase OpenGLWindowContext;
+    /// <summary>
+    /// OpenGL context from render thread.
+    /// </summary>
+    internal SPBOpenGLContext OpenGLRenderContext;
+
     // Swap chain
     private Swapchain _swapchain = null;
     // Commands
@@ -68,6 +84,7 @@ public class VeldridRender
         GraphicsDeviceOptions options = new GraphicsDeviceOptions
         {
             ResourceBindingModel = ResourceBindingModel.Improved,
+            SwapchainDepthFormat = PixelFormat.D32_Float_S8_UInt,
         };
 #if DEBUG
         options.Debug = true;
@@ -86,8 +103,24 @@ public class VeldridRender
                 break;
             case GraphicsBackend.OpenGL:
             case GraphicsBackend.OpenGLES:
-                // Todo how to handle opengl?
-                // Opengl cannot use a seperate swap chain
+                void SetVSync(bool vsync) { }
+
+                var context = this.OpenGLWindowContext;
+                var window = this.OpenGLWindow;
+                if (window == null || context == null)
+                    throw new Exception($"No OpenGL window or context setup!");
+
+                var glPlatformInfo = new OpenGLPlatformInfo(
+                   context.ContextHandle, // OpenGL context handle
+                   OpenGLRenderContext._context.GetProcAddress,  // Function loader
+                   ctx => context.MakeCurrent(window),  // Make current
+                   () => context.ContextHandle, // Get current context
+                   () => context.MakeCurrent(null), // Clear current context
+                   ctx => { context.Dispose(); }, // Delete context
+                   () => window.SwapBuffers(), // Swap buffers
+                   vsync => SetVSync(vsync) // Set vertical sync
+                );
+                 _graphicsDevice = GraphicsDevice.CreateOpenGL(options, glPlatformInfo, 4, 4);
                 break;
         }
 
@@ -101,7 +134,12 @@ public class VeldridRender
         if (_graphicsDevice == null)
             throw new Exception($"Failed to create graphics device!");
 
-        _swapchain = CreateSwapchain(controlHandle, instanceHandle);
+        // OpenGL uses mainswapchain instead
+        if (GraphicsRuntime.GraphicsBackend != GraphicsBackend.OpenGL &&
+            GraphicsRuntime.GraphicsBackend != GraphicsBackend.OpenGLES)
+        {
+            _swapchain = CreateSwapchain(controlHandle, instanceHandle);
+        }
         _commandList = _graphicsDevice.ResourceFactory.CreateCommandList();
 
         Debug.WriteLine($"Created resources");
@@ -182,7 +220,9 @@ public class VeldridRender
                 if (!drawing)
                 {
                     drawing = true;
-                    RenderFrame(_graphicsDevice, _commandList, _swapchain);
+                    // MainSwapchain  used by opengl, else use custom set swap chain
+                    RenderFrame(_graphicsDevice, _commandList,
+                        _swapchain == null ? _graphicsDevice.MainSwapchain : _swapchain);
                     drawing = false;
                 }
             }

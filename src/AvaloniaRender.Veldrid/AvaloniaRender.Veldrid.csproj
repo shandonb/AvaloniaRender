@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.5" />
+    <PackageReference Include="SPB" Version="0.0.4-build32" />
     <PackageReference Include="Veldrid" Version="4.9.0" />
   </ItemGroup>
 
