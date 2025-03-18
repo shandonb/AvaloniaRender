@@ -16,6 +16,7 @@ using Veldrid.OpenGL;
 using Veldrid;
 using Avalonia.Rendering;
 using AvaloniaRender.Veldrid.OpenGL;
+using Vulkan.Xlib;
 
 namespace AvaloniaRender.Veldrid
 {
@@ -157,6 +158,10 @@ namespace AvaloniaRender.Veldrid
         {
             Renderer?.Close();
             this.NativeWindow?.Dispose();
+
+            Renderer?.OpenGLRenderContext?.Dispose();
+            Renderer?.OpenGLWindowContext?.Dispose();
+            Renderer?.OpenGLWindow?.Dispose();
         }
     }
 }

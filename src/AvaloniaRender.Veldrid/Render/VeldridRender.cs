@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Veldrid;
 using Veldrid.OpenGL;
-using Vulkan.Xcb;
 
 namespace AvaloniaRender.Veldrid;
 
