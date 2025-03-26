@@ -11,8 +11,6 @@ namespace AvaloniaRender.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            LoadOpenGL();
             LoadVeldrid();
         }
 
@@ -33,9 +31,8 @@ namespace AvaloniaRender.Views
             tabControl.Items.Add(new TabItem()
             {
                 Header = "Open GL",
-                Content = new EmbeddedWindowOpenGL()
+                Content = new EmbeddedWindowOpenGLVeldrid()
                 {
-                    DataContext = new OpenGLWindowViewModel()
                 }
             });
         }
