@@ -84,6 +84,7 @@ public class VeldridRender
         {
             ResourceBindingModel = ResourceBindingModel.Improved,
             SwapchainDepthFormat = PixelFormat.D32_Float_S8_UInt,
+            Debug = true
         };
 #if DEBUG
         options.Debug = true;
