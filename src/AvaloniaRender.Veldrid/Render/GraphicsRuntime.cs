@@ -19,10 +19,10 @@ namespace AvaloniaRender.Veldrid
             // Vulkan for linux, otherwise OpenGL
             if (GraphicsDevice.IsBackendSupported(GraphicsBackend.Metal))
                 return GraphicsBackend.Metal;
+            else if (GraphicsDevice.IsBackendSupported(GraphicsBackend.Direct3D11))
+                return GraphicsBackend.Direct3D11;
             else if (GraphicsDevice.IsBackendSupported(GraphicsBackend.Vulkan))
                 return GraphicsBackend.Vulkan;
-            if (GraphicsDevice.IsBackendSupported(GraphicsBackend.Direct3D11))
-                return GraphicsBackend.Direct3D11;
             else if (GraphicsDevice.IsBackendSupported(GraphicsBackend.OpenGL))
                 return GraphicsBackend.OpenGL;
 
