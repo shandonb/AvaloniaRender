@@ -83,7 +83,7 @@ public class VeldridRender
         GraphicsDeviceOptions options = new GraphicsDeviceOptions
         {
             ResourceBindingModel = ResourceBindingModel.Improved,
-            SwapchainDepthFormat = PixelFormat.D32_Float_S8_UInt,
+            SwapchainDepthFormat = PixelFormat.D24_UNorm_S8_UInt,
             Debug = true
         };
 #if DEBUG
@@ -151,7 +151,7 @@ public class VeldridRender
         IntPtr instance = instanceHandle ?? throw new Exception();
         IntPtr display = IntPtr.Zero;
 
-        var depthhFormat = PixelFormat.R32_Float;
+        var depthhFormat = PixelFormat.D24_UNorm_S8_UInt;
         bool vsync = false;
 
         // Note: this swapchain behavior cannot be used on opengl backend due to the behavior of opengl
